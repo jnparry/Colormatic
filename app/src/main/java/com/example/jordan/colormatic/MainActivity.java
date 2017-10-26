@@ -9,10 +9,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
     // added the first comment 10/25/17
     // added the second comment 10/25/17
-    ///this is a better comment
-    //this is the "YOU KNOW" edit
+    // Hurry up Chris!
+    // I'd like a PB & J with extra J and no PB.
 }
