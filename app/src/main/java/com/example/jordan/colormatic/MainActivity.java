@@ -12,6 +12,6 @@ public class MainActivity extends AppCompatActivity {
     }
     // added the first comment 10/25/17
     // added the second comment 10/25/17
-    // this should cause conflict! :O suppp
-    // why no merge conflict?
+    // Hurry up Chris!
+    // I'd like a PB & J with extra J and no PB.
 }
