@@ -13,5 +13,6 @@ public class MainActivity extends AppCompatActivity {
     }
     // added the first comment 10/25/17
     // added the second comment 10/25/17
-    ///this is a better comment s
+    ///this is a better comment
+    //this is the "YOU KNOW" edit
 }
