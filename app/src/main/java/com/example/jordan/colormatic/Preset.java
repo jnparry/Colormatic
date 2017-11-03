@@ -25,7 +25,7 @@ public class Preset {
     void setColor(ColorSpace color) {colorSpace = color;}
 
 
-    private  String presetName;
+    private  String presetName; 
     private ColorSpace colorSpace;
 
 }
