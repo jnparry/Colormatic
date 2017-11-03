@@ -15,15 +15,13 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-
-
    @Test
     public void stringLengthTest() throws Exception {
         Preset presetString = new Preset("NULL");
 
-        assertEquals("TIS NO GOOD LENGTH",presetString.getString().length(),10 );
+        assertEquals("TIS NO GOOD LENGTH",presetString.getPresetName().length(),10 );
 
-        if( presetString.getString().length() <= 10)
+        if( presetString.getPresetName().length() <= 10)
         {
             System.out.println("you are able to move forward");
         }
