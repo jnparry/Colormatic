@@ -19,7 +19,7 @@ public class ExampleUnitTest {
     public void stringLengthTest() throws Exception {
         Preset presetString = new Preset("NULL");
 
-        assertEquals("TIS NO GOOD LENGTH",presetString.getPresetName().length(),10 );
+        assertEquals("TIS NO GOOD LENGTH",10, (presetString.getPresetName().length()));
 
         if( presetString.getPresetName().length() <= 10)
         {
