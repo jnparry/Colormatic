@@ -14,4 +14,24 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
+
+
+   @Test
+    public void stringLengthTest() throws Exception {
+        Preset presetString = new Preset("NULL");
+
+        assertEquals("TIS NO GOOD LENGTH",presetString.getString().length(),10 );
+
+        if( presetString.getString().length() <= 10)
+        {
+            System.out.println("you are able to move forward");
+        }
+        else
+        {
+            System.out.println("THIS IS TOO LONG");
+        }
+
+    }
+
 }

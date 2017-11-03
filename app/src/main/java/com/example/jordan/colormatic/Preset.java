@@ -7,12 +7,25 @@ import android.graphics.ColorSpace;
  */
 
 public class Preset {
-    String presetName;
-    ColorSpace colorSpace;
+
+    Preset(){
+        presetName = "";
+        colorSpace = null;
+    }
+    Preset(String stringTemp){
+        presetName = stringTemp;
+        colorSpace = null;
+    }
 
     String getString() {return presetName;}
-    void setString(String name) {presetName = name;}
 
+    void setString(String name) {presetName = name;}
     ColorSpace getColor() {return colorSpace;}
+
     void setColor(ColorSpace color) {colorSpace = color;}
+
+
+    private  String presetName;
+    private ColorSpace colorSpace;
+
 }
