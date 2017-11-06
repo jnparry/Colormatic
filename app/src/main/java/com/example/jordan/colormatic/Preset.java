@@ -8,21 +8,23 @@ import android.graphics.ColorSpace;
 
 public class Preset {
 
-    private  String presetName;
+    // Variables
+    private String     presetName;
     private ColorSpace colorSpace;
 
+    // Methods
     Preset(){
         presetName = "";
         colorSpace = null;
     }
+
     Preset(String stringTemp){
         presetName = stringTemp;
         colorSpace = null;
     }
 
-    public String getPresetName() {return presetName;}
-    public void setPresetName(String name) {presetName = name;}
-
-    public ColorSpace getColor() {return colorSpace;}
-    public void setColor(ColorSpace color) {colorSpace = color;}
+    public void       setPresetName(String name) { presetName = name;  }
+    public void       setColor(ColorSpace color) { colorSpace = color; }
+    public String     getPresetName()            { return presetName;  }
+    public ColorSpace getColor()                 { return colorSpace;  }
 }
