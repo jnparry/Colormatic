@@ -20,6 +20,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
+        android:shape="ring"
         android:id="@+id/btn_takepicture"
         android:layout_width="72dp"
         android:layout_height="71dp"
@@ -27,8 +28,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:background="@drawable/roundedbutton"
-        android:text="@string/take_picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/moveToSecondActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Second Activity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

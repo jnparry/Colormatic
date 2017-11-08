@@ -2,6 +2,7 @@ package com.example.jordan.colormatic;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
@@ -67,11 +68,19 @@ public class MainActivity extends AppCompatActivity {
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
         Button takePictureButton = (Button) findViewById(R.id.btn_takepicture);
+        Button changeActivityButton = (Button) findViewById(R.id.moveToSecondActivity);
         assert takePictureButton != null;
+        assert changeActivityButton != null;
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePicture();
+            }
+        });
+        changeActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
             }
         });
     }
