@@ -3,6 +3,7 @@ package com.example.jordan.colormatic;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
@@ -31,6 +32,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
+
+    public static final String APP_PREFS = "APPLICATION_PREFERENCES";
+    public static final String TEST_TEXT = "TEXT";
+    //String _text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,13 +84,33 @@ public class MainActivity extends AppCompatActivity {
                 takePicture();
             }
         });
+
+        final Intent intent = new Intent();
+
+
         changeActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                EditText testTxt = (EditText) findViewById(R.id.testTxt);
+//                String text = testTxt.getText().toString();
+//                Intent scriptureIntent = new Intent(MainActivity.this, SecondActivity.class);
+//                scriptureIntent.putExtra(TEST_TEXT, text);
+                //testTxt.setText(testText);
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                //Toast.makeText(this, "Saved Text", Toast.LENGTH_SHORT).show();
+//                startActivity(intent);
             }
         });
     }
+
+        protected void loadText() {
+        SharedPreferences sharedPref = getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
+        EditText testTxt = (EditText) findViewById(R.id.testTxt);
+        String text = testTxt.getText().toString();
+        Intent scriptureIntent = new Intent(this, SecondActivity.class);
+        scriptureIntent.putExtra(TEST_TEXT, text);
+    }
+
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {

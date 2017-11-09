@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Colormatic</string>
     <string name="take_picture">Take picture</string>
+    <string name="testString">Replace me!</string>
 </resources>

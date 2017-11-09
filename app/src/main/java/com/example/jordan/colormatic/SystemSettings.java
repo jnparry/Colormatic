@@ -3,6 +3,7 @@ package com.example.jordan.colormatic;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -50,7 +51,7 @@ public class SystemSettings extends AppCompatActivity {
 
             @Override
             public int getOpacity() {
-                return 0;
+                return PixelFormat.TRANSPARENT;
             }
         };
     }
