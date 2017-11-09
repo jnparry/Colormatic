@@ -13,11 +13,13 @@ public class Preset {
     private ColorSpace colorSpace;
 
     // Methods
+    //Default Constructor
     Preset(){
         presetName = "";
         colorSpace = null;
     }
 
+    //Non-Default constructor
     Preset(String stringTemp){
         presetName = stringTemp;
         colorSpace = null;

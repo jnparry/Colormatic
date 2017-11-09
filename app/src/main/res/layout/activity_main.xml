@@ -9,7 +9,7 @@
     <TextureView
         android:id="@+id/texture"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="823dp"
         android:layout_above="@+id/btn_takepicture"
         android:layout_alignParentTop="true"
         app:layout_constraintBottom_toBottomOf="parent"
