@@ -65,6 +65,12 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
 
+    /******************************************************************
+     * SAVE TEXT
+     * Called by saveBttn when pressed: saves the data within the
+     * EditText (User Input) box object and Updates text in TextView
+     * object(Display Box)
+    *******************************************************************/
     protected void saveText() {
 
         SharedPreferences sharedPrefs = getSharedPreferences(MainActivity.APP_PREFS, Context.MODE_PRIVATE);

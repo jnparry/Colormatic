@@ -66,11 +66,32 @@ public class SystemSettings extends AppCompatActivity {
 
     }
 
+    /**************************************************************************
+    * ADD PRESET
+    * Gives the ability for another preset to be added to a list of Preset
+    * options
+    * Parameters: Preset objec to be added
+    ***************************************************************************/
     public void addPreset(Preset preset) {
+        presetList.add(preset);
+    }
+    /*********************************************************************
+     * GET PRESET
+     * Grabs specified presest out of List of Saved Presets
+     *  Parameter: String object containing the name of Preset to search
+     *  for in Preset list
+     * Return: Returns preset object from list
+    ************************************************************************/
+    public void getPreset(String presetName) {
 
     }
 
-    public void applyPreset() {
+    /***********************************************************************
+     * APPLY PRESET
+     * Loads the Preset selected by the User
+     * Parameter: Preset object to be loaded into system
+    **********************************************************************/
+    public void applyPreset(Preset presetToApply) {
 
     }
 
