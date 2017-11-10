@@ -33,6 +33,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -74,10 +75,12 @@ public class MainActivity extends AppCompatActivity {
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
+        ImageButton crosshairButton = (ImageButton) findViewById(R.id.crosshair_btn);
         Button takePictureButton = (Button) findViewById(R.id.btn_takepicture);
         Button changeActivityButton = (Button) findViewById(R.id.moveToSecondActivity);
         assert takePictureButton != null;
         assert changeActivityButton != null;
+        assert crosshairButton != null;
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final Intent intent = new Intent();
-
 
         changeActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +105,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-        protected void loadText() {
+    public void crosshairButton(View view) {
+        Toast.makeText(this, "Crosshair Button Pressed", Toast.LENGTH_SHORT).show();
+    }
+
+    protected void loadText() {
         SharedPreferences sharedPref = getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
         EditText testTxt = (EditText) findViewById(R.id.testTxt);
         String text = testTxt.getText().toString();
@@ -117,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             //open your camera here
             openCamera();
         }
+
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
             // Transform you image captured size according to the surface width and height
