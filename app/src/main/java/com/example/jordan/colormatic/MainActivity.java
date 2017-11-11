@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String APP_PREFS = "APPLICATION_PREFERENCES";
     public static final String TEST_TEXT = "TEXT";
-    //String _text;
+    private String hexCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Intent intent = new Intent();
+        //final Intent intent = new Intent();
 
         changeActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -358,5 +359,13 @@ public class MainActivity extends AppCompatActivity {
         closeCamera();
         stopBackgroundThread();
         super.onPause();
+    }
+
+    /* color editing functions */
+    // takes a bitmap object as a parameter and changes it to the specified color in the preset class, and returns the new color.
+    private Bitmap changeHue(Bitmap color) {return color;}
+
+    private void setHexColor() {
+        hexCode = "";
     }
 }
