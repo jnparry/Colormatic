@@ -8,8 +8,8 @@
 
     <TextureView
         android:id="@+id/texture"
-        android:layout_width="match_parent"
-        android:layout_height="823dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_above="@+id/btn_takepicture"
         android:layout_alignParentTop="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,22 +41,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <EditText
-        android:id="@+id/testTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/testString"
-        android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/texture" />
-
     <ImageButton
         android:id="@+id/crosshair_btn"
         android:layout_width="385dp"
-        android:layout_height="516dp"
+        android:layout_height="556dp"
         android:background="@null"
         android:onClick="crosshairButton"
         app:layout_constraintBottom_toBottomOf="parent"
