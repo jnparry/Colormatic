@@ -110,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Crosshair Button Pressed", Toast.LENGTH_SHORT).show();
     }
 
+  /*  protected void loadText() {
+        SharedPreferences sharedPref = getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
+        EditText testTxt = (EditText) findViewById(R.id.testTxt);
+        String text = testTxt.getText().toString();
+        Intent scriptureIntent = new Intent(this, SecondActivity.class);
+        scriptureIntent.putExtra(TEST_TEXT, text);
+    }*/
+
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -199,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory()+"colormaticimage" + "/ColormaticImagepic.jpg");
+            final File file = new File(Environment.getExternalStorageDirectory()+"/colormaticimage" + "/ColormaticImagepic.jpg");
 
 
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
