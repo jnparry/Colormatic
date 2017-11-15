@@ -3,8 +3,10 @@ package com.example.jordan.colormatic;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import android.widget.Toast;
  */
 
 public class SecondActivity extends AppCompatActivity {
+    public static final String TAG = "SECOND ACTIVITY USER";
 
     public static final String APP_PREFS = "APPLICATION_PREFERENCES";
     String _text;
@@ -44,8 +47,8 @@ public class SecondActivity extends AppCompatActivity {
         userText = (EditText) findViewById(R.id.userText);
 
         //sets a value for user text default
-        text = "input your preset name";
-        userText.setText(text);
+        //text = "input your preset name";
+       // userText.setText(text);
 
         //Creates the save button and values
         Button saveBttn = (Button) findViewById(R.id.saveBttn);
@@ -72,6 +75,13 @@ public class SecondActivity extends AppCompatActivity {
      * object(Display Box)
     *******************************************************************/
     protected void saveText() {
+
+        String msg = "THIS ";
+        String tag = "SECOND ACTIVITY";
+        Throwable tr = new Throwable();
+
+        Log.e(tag, msg, tr);
+        //Log.e(tag, msg);
 
         SharedPreferences sharedPrefs = getSharedPreferences(MainActivity.APP_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
