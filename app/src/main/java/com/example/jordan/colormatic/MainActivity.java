@@ -44,6 +44,12 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+/**
+ *
+ *
+ *  @author ColormaticTeam
+ *
+ */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private TextureView textureView;
@@ -69,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String TEST_TEXT = "TEXT";
     private String hexCode;
 
+    /**
+     * Creates camera object and respective variables
+     *
+     * @author ColormaticTeam
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
