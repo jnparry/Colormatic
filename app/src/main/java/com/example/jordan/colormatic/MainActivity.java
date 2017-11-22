@@ -108,7 +108,14 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        Toast.makeText(MainActivity.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        if ("Settings" == (String) menuItem.getTitle()) {
+                            Toast.makeText(MainActivity.this, "New Activity", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        }
+
                         return true;
                     }
                 });
