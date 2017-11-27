@@ -93,10 +93,8 @@ public class MainActivity extends AppCompatActivity {
         ImageButton crosshairButton = findViewById(R.id.crosshair_btn);
         final Button menu = findViewById(R.id.btn_menu);
         Button takePictureButton = findViewById(R.id.btn_takepicture);
-        Button changeActivityButton = findViewById(R.id.moveToSecondActivity);
         assert menu != null;
         assert takePictureButton != null;
-        assert changeActivityButton != null;
         assert crosshairButton != null;
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -128,13 +126,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 takePicture();
-            }
-        });
-
-        changeActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
             }
         });
     }
