@@ -3,7 +3,6 @@ package com.example.jordan.colormatic;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
@@ -34,7 +33,6 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -46,6 +44,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
 /**
  *
  *
@@ -63,19 +63,19 @@ public class MainActivity extends AppCompatActivity {
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
 
-    protected CameraDevice cameraDevice;
-    protected CameraCaptureSession cameraCaptureSessions;
-    protected CaptureRequest.Builder captureRequestBuilder;
+    private CameraDevice cameraDevice;
+    private CameraCaptureSession cameraCaptureSessions;
+    private CaptureRequest.Builder captureRequestBuilder;
     private Size imageDimension;
     private File file = null;
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
+    private List<Preset> presetList;
 
     public static final String APP_PREFS = "APPLICATION_PREFERENCES";
     public static final String TEST_TEXT = "TEXT";
-    private String hexCode;
 
     /**
      * Creates camera object and respective variables
@@ -87,28 +87,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textureView = (TextureView) findViewById(R.id.texture);
+        textureView = findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
-        ImageButton crosshairButton = (ImageButton) findViewById(R.id.crosshair_btn);
-        final Button menu = (Button) findViewById(R.id.btn_menu);
-        Button takePictureButton = (Button) findViewById(R.id.btn_takepicture);
-        Button changeActivityButton = (Button) findViewById(R.id.moveToSecondActivity);
-        //Button advanceSettings = (Button) findViewById(R.id.btn_menu);
+        ImageButton crosshairButton = findViewById(R.id.crosshair_btn);
+        final Button menu = findViewById(R.id.btn_menu);
+        Button takePictureButton = findViewById(R.id.btn_takepicture);
 
-      /*  advanceSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, advanceSetting.class));
-            }
-        });*/
         assert menu != null;
         assert takePictureButton != null;
-        assert changeActivityButton != null;
         assert crosshairButton != null;
-
-
-
 
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -120,18 +108,16 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        if ("Settings" == (String) menuItem.getTitle()) {
+                        if (Objects.equals("Settings", menuItem.getTitle())) {
                             Toast.makeText(MainActivity.this, "New Activity", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                            startActivity(new Intent(MainActivity.this, advanceSetting.class));
                         }
                         else {
                             Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         }
-
                         return true;
                     }
                 });
-
                 popupMenu.show();
             }
         });
@@ -142,35 +128,11 @@ public class MainActivity extends AppCompatActivity {
                 takePicture();
             }
         });
-
-        //final Intent intent = new Intent();
-
-        changeActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                EditText testTxt = (EditText) findViewById(R.id.testTxt);
-//                String text = testTxt.getText().toString();
-//                Intent scriptureIntent = new Intent(MainActivity.this, SecondActivity.class);
-//                scriptureIntent.putExtra(TEST_TEXT, text);
-                //testTxt.setText(testText);
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
-                //Toast.makeText(this, "Saved Text", Toast.LENGTH_SHORT).show();
-//                startActivity(intent);
-            }
-        });
     }
 
     public void crosshairButton(View view) {
         Toast.makeText(this, "Crosshair Button Pressed", Toast.LENGTH_SHORT).show();
     }
-
-  /*  protected void loadText() {
-        SharedPreferences sharedPref = getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
-        EditText testTxt = (EditText) findViewById(R.id.testTxt);
-        String text = testTxt.getText().toString();
-        Intent scriptureIntent = new Intent(this, SecondActivity.class);
-        scriptureIntent.putExtra(TEST_TEXT, text);
-    }*/
 
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
@@ -420,6 +382,6 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap changeHue(Bitmap color) {return color;}
 
     private void setHexColor() {
-        hexCode = "";
+        String hexCode = "";
     }
 }
