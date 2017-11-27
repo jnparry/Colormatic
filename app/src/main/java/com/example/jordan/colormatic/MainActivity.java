@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String APP_PREFS = "APPLICATION_PREFERENCES";
     public static final String TEST_TEXT = "TEXT";
- 
+
     /**
      * Creates camera object and respective variables
      *
