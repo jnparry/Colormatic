@@ -65,6 +65,4 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_takepicture"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--app:srcCompat="@android:drawable/crosshair />-->
-
 </android.support.constraint.ConstraintLayout>
