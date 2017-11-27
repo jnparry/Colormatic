@@ -94,10 +94,22 @@ public class MainActivity extends AppCompatActivity {
         final Button menu = (Button) findViewById(R.id.btn_menu);
         Button takePictureButton = (Button) findViewById(R.id.btn_takepicture);
         Button changeActivityButton = (Button) findViewById(R.id.moveToSecondActivity);
+        //Button advanceSettings = (Button) findViewById(R.id.btn_menu);
+
+      /*  advanceSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, advanceSetting.class));
+            }
+        });*/
         assert menu != null;
         assert takePictureButton != null;
         assert changeActivityButton != null;
         assert crosshairButton != null;
+
+
+
+
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
