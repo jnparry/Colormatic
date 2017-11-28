@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -29,12 +30,15 @@ import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -55,6 +59,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private TextureView textureView;
+    private TextView myTextView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -77,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String APP_PREFS = "APPLICATION_PREFERENCES";
     public static final String TEST_TEXT = "TEXT";
 
+    private Bitmap bitmap;
+
     /**
      * Creates camera object and respective variables
      *
@@ -93,6 +100,26 @@ public class MainActivity extends AppCompatActivity {
         ImageButton crosshairButton = findViewById(R.id.crosshair_btn);
         final ImageButton menu = findViewById(R.id.btn_menu);
         Button takePictureButton = findViewById(R.id.btn_takepicture);
+
+        textureView.setDrawingCacheEnabled(true);
+        textureView.buildDrawingCache(true);
+//        textureView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+//                    bitmap = textureView.getDrawingCache();
+//                    int pixel = bitmap.getPixel((int)motionEvent.getX(), (int)motionEvent.getY());
+//
+//                    int r = Color.red(pixel);
+//                    int g = Color.green(pixel);
+//                    int b = Color.blue(pixel);
+//
+//                    myTextView.setBackgroundColor(Color.rgb(r, g, b));
+//                    myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
+//                }
+//                return true;
+//            }
+//        });
 
         assert menu != null;
         assert takePictureButton != null;
@@ -137,8 +164,22 @@ public class MainActivity extends AppCompatActivity {
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+            myTextView = findViewById(R.id.textView);
             //open your camera here
             openCamera();
+
+//            bitmap = textureView.getBitmap();
+////            bitmap = textureView.getDrawingCache();
+//            int pixel = bitmap.getPixel(50, 50);
+//
+//            int r = Color.red(pixel);
+//            int g = Color.green(pixel);
+//            int b = Color.blue(pixel);
+//
+//            myTextView.setBackgroundColor(Color.rgb(r, g, b));
+//            myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
+//            return true;
+//        }
         }
 
         @Override
@@ -151,8 +192,19 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+            bitmap = textureView.getBitmap();
+
+            int pixel = bitmap.getPixel(0, 0); // right now this puts the color grab in the corner of the screen. We need to do mth to put it in the center
+
+            int r = Color.red(pixel);
+            int g = Color.green(pixel);
+            int b = Color.blue(pixel);
+
+            myTextView.setBackgroundColor(Color.rgb(r, g, b));
+            myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
         }
     };
+
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(@NonNull CameraDevice camera) {

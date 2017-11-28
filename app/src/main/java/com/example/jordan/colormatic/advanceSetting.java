@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class advanceSetting extends AppCompatActivity {
@@ -24,7 +27,9 @@ public class advanceSetting extends AppCompatActivity {
         /**
          * initialize adapter
          */
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 );
+        ArrayList<String> entries =
+                new ArrayList<String>(Arrays.asList("List Item A", "List Item B"));
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, entries);
 
         /**
          * Sets preset's list view
@@ -34,8 +39,12 @@ public class advanceSetting extends AppCompatActivity {
 
         for(int i = 0; i < 10; ++i)
         {
-            String value = "this" + i;
-            adapter.add(value);
+            String myString = new String("add this");
+            adapter.setNotifyOnChange(true);
+            adapter.add(myString);
+            preset.setAdapter(adapter);
+//            String value = "this" + i;
+//            adapter.add(value);
         }
 //        preset.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
