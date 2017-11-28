@@ -16,14 +16,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_picker_view" />
+        app:layout_constraintTop_toBottomOf="@+id/color_picker_view"
+        app:layout_constraintVertical_bias="0.846" />
 
     <EditText
         android:id="@+id/userText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:contentDescription="PRESET NAME:"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Preset Name"
         android:inputType="textPersonName"
@@ -36,7 +36,7 @@
         android:id="@+id/color_picker_view"
         android:layout_width="369dp"
         android:layout_height="389dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
         app:alphaSlider="true"
         app:alphaSliderView="@+id/v_alpha_slider"
         app:density="12"
