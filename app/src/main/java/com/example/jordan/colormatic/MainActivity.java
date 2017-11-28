@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -91,7 +93,15 @@ public class MainActivity extends AppCompatActivity {
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
         ImageButton crosshairButton = findViewById(R.id.crosshair_btn);
-        final Button menu = findViewById(R.id.btn_menu);
+
+//        Drawable drawable = getResources().getDrawable(R.drawable.ic_stat_name);
+//        drawable.setBounds(0, 0, (int)(drawable.getIntrinsicWidth()*0.5),
+//                (int)(drawable.getIntrinsicHeight()*0.5));
+//        ScaleDrawable sd = new ScaleDrawable(drawable, 0, 10, 10);
+//        ImageButton btn = findViewById(R.id.btn_menu);
+//        btn.setCompoundDrawables(sd.getDrawable(), null, null, null); //set drawableLeft for example
+        final ImageButton menu = findViewById(R.id.btn_menu);
+
         Button takePictureButton = findViewById(R.id.btn_takepicture);
 
         assert menu != null;

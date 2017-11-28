@@ -42,7 +42,7 @@ public class advanceSetting extends AppCompatActivity {
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                switch( position )
 //                {
-//                    case 0:  Intent newActivity = new Intent(this, SecondActivity.class);
+//                    case 0:  Intent newActivity = new Intent(this, CreatePreset.class);
 //                        startActivity(newActivity);
 //                        break;
 //                    case 1:  Intent newActivity = new Intent(this, youtube.class);

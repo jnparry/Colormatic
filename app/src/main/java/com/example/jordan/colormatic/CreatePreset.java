@@ -16,7 +16,7 @@ import android.widget.Toast;
  * Created by Logan on 11/8/2017.
  */
 
-public class SecondActivity extends AppCompatActivity {
+public class CreatePreset extends AppCompatActivity {
     public static final String TAG = "SECOND ACTIVITY USER";
 
     public static final String APP_PREFS = "APPLICATION_PREFERENCES";
@@ -34,7 +34,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.create_preset);
         Intent intent = getIntent();
 
         _text = intent.getStringExtra(MainActivity.TEST_TEXT);
