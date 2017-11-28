@@ -39,24 +39,12 @@ public class CreatePreset extends AppCompatActivity {
 
         _text = intent.getStringExtra(MainActivity.TEST_TEXT);
 
-        TextView label = (TextView) findViewById(R.id.displayText);
-        label.setText(_text);
-
         //userText boxed is referenced and initialized for use in program
         userText = (EditText) findViewById(R.id.userText);
-
-        //sets a value for user text default
-        //text = "input your preset name";
-       // userText.setText(text);
 
         //Creates the save button and values
         Button saveBttn = (Button) findViewById(R.id.saveBttn);
         assert saveBttn != null;
-
-        //The display text object and initialization
-        displayText = (TextView) findViewById(R.id.displayText);
-        message = "YOUR Text from above loads here when read in";
-        displayText.setText(message);
 
         // Finds the object and what the button will do when pressed
         saveBttn.setOnClickListener(new View.OnClickListener() {
@@ -98,16 +86,6 @@ public class CreatePreset extends AppCompatActivity {
 
 
    }
-
-//    protected void loadText() {
-//        SharedPreferences sharedPref = getSharedPreferences(APP_PREFS, Context.MODE_PRIVATE);
-//        EditText testTxt = (EditText) findViewById(R.id.testTxt);
-//        String text = testTxt.getText().toString();
-//        String testText = sharedPref.getString(TEST_TEXT, null);
-//        testTxt.setText(testText);
-
-//    }
-
 }
 
 
