@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
+
 /**
  * Created by Logan on 11/8/2017.
  */
@@ -26,6 +28,7 @@ public class CreatePreset extends AppCompatActivity {
     // object used to save string from userText box
     private String userName;
     private String text;
+    private ColorPickerDialogBuilder colorPicker;
 
 
     private TextView displayText;
@@ -36,6 +39,8 @@ public class CreatePreset extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_preset);
         Intent intent = getIntent();
+
+        ColorPickerDialogBuilder.with(this); // creates a new ColorPicker object
 
         _text = intent.getStringExtra(MainActivity.TEST_TEXT);
 
@@ -51,6 +56,7 @@ public class CreatePreset extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveText();
+                saveColor();
             }
         });
     }
@@ -68,7 +74,6 @@ public class CreatePreset extends AppCompatActivity {
         Throwable tr = new Throwable();
 
         Log.e(tag, msg, tr);
-        //Log.e(tag, msg);
 
         SharedPreferences sharedPrefs = getSharedPreferences(MainActivity.APP_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
@@ -85,6 +90,15 @@ public class CreatePreset extends AppCompatActivity {
         displayText.setText(message);
 
 
+   }
+
+   private void saveColor() {
+//    ColorPickerDialogBuilder.setOnColorSelectedListener(new OnColorSelectedListener() {
+//        @Override
+//        public void onColorSelected(int selectedColor) {
+//            Toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
+//            }
+//        })
    }
 }
 
