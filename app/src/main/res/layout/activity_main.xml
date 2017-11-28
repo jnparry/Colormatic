@@ -4,30 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.jordan.colormatic.MainActivity">
 
     <TextureView
         android:id="@+id/texture"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_takepicture"
         android:layout_alignParentTop="true"
-        android:defaultFocusHighlightEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
  
     <Button
         android:id="@+id/btn_takepicture"
         android:layout_width="72dp"
-        android:layout_height="71dp"
+        android:layout_height="72dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:background="@drawable/roundedbutton"
-        android:shape="ring"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -35,7 +33,7 @@
     <ImageButton
         android:id="@+id/crosshair_btn"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="584dp"
         android:background="@null"
         android:onClick="crosshairButton"
         app:layout_constraintBottom_toBottomOf="parent"
