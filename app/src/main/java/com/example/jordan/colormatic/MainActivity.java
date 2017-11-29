@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-            // Transform you image captured size according to the surface width and height
+            // Transform the image captured size according to the surface width and height
         }
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
