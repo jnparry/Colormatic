@@ -23,9 +23,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.VideoProfile;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private TextureView textureView;
     private TextView myTextView;
+
+    private boolean p1 = false; // preset1
+    private boolean p2 = false; // preset2
+    private boolean p3 = false; // preset3
+
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -139,8 +146,42 @@ public class MainActivity extends AppCompatActivity {
                             //startActivity(new Intent(MainActivity.this, advanceSetting.class));
                             startActivity(new Intent(MainActivity.this, CreatePreset.class)); // just a shortcut until we can have the 2nd and 3rd activity communicate
                         }
+                        else if (Objects.equals("Deuteranomaly", menuItem.getTitle())) {
+                            Toast.makeText(MainActivity.this, "Locate your visual accessibility settings", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Turn on your color adjustment for your specific colorblindness", Toast.LENGTH_LONG).show();
+                            startActivityForResult(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), 0);
+                            if (p1 == true) {
+                                p1 = false;
+                            }
+                            else {
+                                p1 = true;
+                                p2 = false;
+                                p3 = false;
+                            }
+                        }
+                        else if (Objects.equals("Protanomaly", menuItem.getTitle())) {
+                            if (p2 == true) {
+                                p2 = false;
+                            }
+                            else {
+                                p1 = false;
+                                p2 = true;
+                                p3 = false;
+                            }
+                        }
+                        else if (Objects.equals("Tritanomaly", menuItem.getTitle())) {
+                            if (p3 == true) {
+                                p3 = false;
+                            }
+                            else {
+                                p1 = false;
+                                p2 = false;
+                                p3 = true;
+                            }
+                        }
                         else {
-                            Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Something went wrong??", Toast.LENGTH_SHORT).show();
+                            return false;
                         }
                         return true;
                     }
@@ -168,6 +209,8 @@ public class MainActivity extends AppCompatActivity {
             //open your camera here
             openCamera();
 
+
+
 //            bitmap = textureView.getBitmap();
 ////            bitmap = textureView.getDrawingCache();
 //            int pixel = bitmap.getPixel(50, 50);
@@ -194,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
             bitmap = textureView.getBitmap();
 
-            int pixel = bitmap.getPixel(0, 0); // right now this puts the color grab in the corner of the screen. We need to do mth to put it in the center
+            int pixel = bitmap.getPixel(0, 0); // right now this puts the color grab in the top left corner of the screen. We need to do mth to put it in the center
 
             int r = Color.red(pixel);
             int g = Color.green(pixel);
@@ -387,7 +430,21 @@ public class MainActivity extends AppCompatActivity {
         if(null == cameraDevice) {
             Log.e(TAG, "updatePreview error, return");
         }
-        captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
+        if (p1 == true) {
+//            captureRequestBuilder.set(CaptureRequest.CONTROL_AWB_MODE, CaptureRequest.CONTROL_AWB_MODE_OFF);
+//            captureRequestBuilder.set(CaptureRequest.COLOR_CORRECTION_MODE, CaptureRequest.COLOR_CORRECTION_MODE_TRANSFORM_MATRIX);
+//            // captureRequestBuilder.set(CaptureRequest.COLOR_CORRECTION_TRANSFORM, CaptureRequest.COLOR_CORRECTION_GAINS)
+//            colorCorrection.transform = [ 0 1 2 3 4 5 6 7 8 9]
+        }
+        else if (p2 == true) {
+
+        }
+        else if (p3 == true) {
+
+        }
+        else {
+            captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
+        }
         try {
             cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
         } catch (CameraAccessException e) {
