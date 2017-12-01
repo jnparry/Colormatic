@@ -28,6 +28,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telecom.VideoProfile;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -110,23 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
         textureView.setDrawingCacheEnabled(true);
         textureView.buildDrawingCache(true);
-//        textureView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-//                    bitmap = textureView.getDrawingCache();
-//                    int pixel = bitmap.getPixel((int)motionEvent.getX(), (int)motionEvent.getY());
-//
-//                    int r = Color.red(pixel);
-//                    int g = Color.green(pixel);
-//                    int b = Color.blue(pixel);
-//
-//                    myTextView.setBackgroundColor(Color.rgb(r, g, b));
-//                    myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
-//                }
-//                return true;
-//            }
-//        });
 
         assert menu != null;
         assert takePictureButton != null;
@@ -199,6 +183,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crosshairButton(View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
         Toast.makeText(this, "Crosshair Button Pressed", Toast.LENGTH_SHORT).show();
     }
 
@@ -208,21 +197,6 @@ public class MainActivity extends AppCompatActivity {
             myTextView = findViewById(R.id.textView);
             //open your camera here
             openCamera();
-
-
-
-//            bitmap = textureView.getBitmap();
-////            bitmap = textureView.getDrawingCache();
-//            int pixel = bitmap.getPixel(50, 50);
-//
-//            int r = Color.red(pixel);
-//            int g = Color.green(pixel);
-//            int b = Color.blue(pixel);
-//
-//            myTextView.setBackgroundColor(Color.rgb(r, g, b));
-//            myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
-//            return true;
-//        }
         }
 
         @Override
@@ -237,8 +211,7 @@ public class MainActivity extends AppCompatActivity {
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
             bitmap = textureView.getBitmap();
 
-            int pixel = bitmap.getPixel(0, 0); // right now this puts the color grab in the top left corner of the screen. We need to do mth to put it in the center
-
+            int pixel = bitmap.getPixel((bitmap.getWidth() / 2), (bitmap.getHeight() / 2));
             int r = Color.red(pixel);
             int g = Color.green(pixel);
             int b = Color.blue(pixel);
