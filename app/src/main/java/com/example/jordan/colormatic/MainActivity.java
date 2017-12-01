@@ -50,7 +50,10 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -91,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String TEST_TEXT = "TEXT";
 
     private Bitmap bitmap;
+
+    private Map<String, Integer> mColors = new HashMap<String, Integer>();
 
     /**
      * Creates camera object and respective variables
@@ -215,10 +220,59 @@ public class MainActivity extends AppCompatActivity {
             int r = Color.red(pixel);
             int g = Color.green(pixel);
             int b = Color.blue(pixel);
+            String colorName = "";
 
-            myTextView.setBackgroundColor(Color.rgb(r, g, b));
-            myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
+            mColors.put("red", Color.rgb(255, 0, 0));
+            mColors.put("pink", Color.rgb(255, 0, 255));
+            mColors.put("violet", Color.rgb(128, 0, 128)); // r 155 b 255
+            mColors.put("blue", Color.rgb(0, 0, 255));
+            mColors.put("green", Color.rgb(0, 255, 0));
+            mColors.put("yellow", Color.rgb(255, 255, 0));
+            mColors.put("orange", Color.rgb(255, 165, 0));
+            mColors.put("white", Color.rgb(255, 255, 255));
+            mColors.put("black", Color.rgb(0, 0, 0));
+            mColors.put("light gray", Color.rgb(211, 211,211));
+            mColors.put("gray", Color.rgb(128, 128, 128));
+
+            colorName = getBestMatchingColorName(pixel);
+
+            myTextView.setBackgroundColor(Color.rgb(0, 0, 0)); // set background to black
+            myTextView.setText(colorName);
+//            myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
         }
+    };
+
+    private String getBestMatchingColorName(int pixelColor) {
+        // largest difference is 255 for every colour component
+        int currentDifference = 3 * 255;
+        // name of the best matching colour
+        String closestColorName = null;
+        // get int values for all three colour components of the pixel
+        int pixelColorR = Color.red(pixelColor);
+        int pixelColorG = Color.green(pixelColor);
+        int pixelColorB = Color.blue(pixelColor);
+
+        Iterator<String> colorNameIterator = mColors.keySet().iterator();
+        // continue iterating if the map contains a next colour and the difference is greater than zero.
+        // a difference of zero means we've found an exact match, so there's no point in iterating further.
+        while (colorNameIterator.hasNext() && currentDifference > 0) {
+            // this colour's name
+            String currentColorName = colorNameIterator.next();
+            // this colour's int value
+            int color = mColors.get(currentColorName);
+            // get int values for all three colour components of this colour
+            int colorR = Color.red(color);
+            int colorG = Color.green(color);
+            int colorB = Color.blue(color);
+            // calculate sum of absolute differences that indicates how good this match is
+            int difference = Math.abs(pixelColorR - colorR) + Math.abs(pixelColorG - colorG) + Math.abs(pixelColorB - colorB);
+            // a smaller difference means a better match, so keep track of it
+            if (currentDifference > difference) {
+                currentDifference = difference;
+                closestColorName = currentColorName;
+            }
+        }
+        return closestColorName;
     };
 
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
