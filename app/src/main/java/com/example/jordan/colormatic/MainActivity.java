@@ -198,16 +198,17 @@ public class MainActivity extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Preset Color", colorName);
-        clipboard.setPrimaryClip(clip);
-
         int pixel = bitmap.getPixel((bitmap.getWidth() / 2), (bitmap.getHeight() / 2));
         int r = Color.red(pixel);
         int g = Color.green(pixel);
         int b = Color.blue(pixel);
 
         String hex = String.format("#%02x%02x%02x", r, g, b);
+
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Preset Color", hex);
+        clipboard.setPrimaryClip(clip);
+
         Toast.makeText(MainActivity.this, "Copied hex code to clipboard: \n" + colorName + ", " + hex, Toast.LENGTH_SHORT).show();
     }
 
