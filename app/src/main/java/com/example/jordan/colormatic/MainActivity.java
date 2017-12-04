@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
         assert takePictureButton != null;
         assert crosshairButton != null;
 
+        createDatabseMap();
+
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,6 +198,133 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Crosshair Button Pressed", Toast.LENGTH_SHORT).show();
     }
 
+    public void createDatabseMap() {
+        mColors.put("Light Salmon", Color.rgb(255,160,122));
+        mColors.put("Salmon", Color.rgb(250,128,114));
+        mColors.put("Dark Salmon", Color.rgb(233,150,122));
+        mColors.put("Light Coral", Color.rgb(240,128,128));
+        mColors.put("Indian Red", Color.rgb(205,92,92));
+        mColors.put("Crimson", Color.rgb(220,20,60));
+        mColors.put("Fire Brick", Color.rgb(178,34,34));
+        mColors.put("Dark Red", Color.rgb(139,0,0));
+        mColors.put("Coral", Color.rgb(255,127,80));
+        mColors.put("Tomato", Color.rgb(255,99,71));
+        mColors.put("Maroon", Color.rgb(128, 0, 0));
+        mColors.put("Red", Color.rgb(255, 0, 0));
+        mColors.put("Orange Red", Color.rgb(255, 69,0));
+        mColors.put("Dark Orange", Color.rgb(255, 140, 0));
+        mColors.put("Orange", Color.rgb(255, 165, 0));
+        mColors.put("Gold", Color.rgb(255, 215, 0));
+        mColors.put("Yellow", Color.rgb(255, 255, 0));
+        mColors.put("Light Yellow", Color.rgb(255,255,224));
+        mColors.put("Light Goldenrod Yellow", Color.rgb(250,250,210));
+        mColors.put("Papaya Whip", Color.rgb(255,239,213));
+        mColors.put("Moccasin", Color.rgb(255,228,181));
+        mColors.put("Peach Puff", Color.rgb(255,218,185));
+        mColors.put("Pale Goldenrod", Color.rgb(238,232,170));
+        mColors.put("Khaki", Color.rgb(240,230,140));
+        mColors.put("Dark Khaki", Color.rgb(189,183,107));
+        mColors.put("Chartreuse", Color.rgb(127,255,0));
+        mColors.put("Lime Green", Color.rgb(50,205,50));
+        mColors.put("Tan", Color.rgb(210, 180, 140));
+        mColors.put("Lime", Color.rgb(0, 255, 0));
+        mColors.put("Green", Color.rgb(0, 128, 0));
+        mColors.put("Dark Green", Color.rgb(0,100,0));
+        mColors.put("Green Yellow", Color.rgb(173,255,47));
+        mColors.put("Spring Green", Color.rgb(0,255,127));
+        mColors.put("Yellow Green", Color.rgb(154,205,50));
+        mColors.put("Light Green", Color.rgb(144,238,144));
+        mColors.put("Pale Green", Color.rgb(152,251,152));
+        mColors.put("Dark Sea Green", Color.rgb(143,188,143));
+        mColors.put("Medium Sea Green", Color.rgb(60,179,113));
+        mColors.put("Sea Green", Color.rgb(46,139,87));
+        mColors.put("Olive", Color.rgb(128,128,0));
+        mColors.put("Dark Olive Green", Color.rgb(85,107,47));
+        mColors.put("Olive Drab", Color.rgb(107,142,35));
+        mColors.put("Light Cyan", Color.rgb(224,255,255));
+        mColors.put("Aqua", Color.rgb(0,255,255));
+        mColors.put("Aquamarine", Color.rgb(127,255,212));
+        mColors.put("Medium Aquamarine", Color.rgb(102,205,170));
+        mColors.put("Pale Turquoise", Color.rgb(175,238,238));
+        mColors.put("Medium Turquoise", Color.rgb(72,209,204));
+        mColors.put("Dark Turquoise", Color.rgb(0,206,209));
+        mColors.put("Light Sea Green", Color.rgb(32,178,170));
+        mColors.put("Cadet Blue", Color.rgb(95,158,160));
+        mColors.put("Dark Cyan", Color.rgb(0,139,139));
+        mColors.put("Sea Green", Color.rgb(46, 139, 87));
+        mColors.put("Teal", Color.rgb(0,128,128));
+        mColors.put("Turquoise", Color.rgb(64,224,208));
+        mColors.put("Light Blue", Color.rgb(173, 216, 230));
+        mColors.put("Light Sky Blue", Color.rgb(135,206,235));
+        mColors.put("Sky Blue", Color.rgb(135,206,250));
+        mColors.put("Deep Sky Blue", Color.rgb(0, 191, 255));
+        mColors.put("Light Steel Blue", Color.rgb(176,196,222));
+        mColors.put("Steel Blue", Color.rgb(70,130,180));
+        mColors.put("Royal Blue", Color.rgb(65,105,225));
+        mColors.put("Dodger Blue", Color.rgb(30,144,255));
+        mColors.put("Cornflower Blue", Color.rgb(100,149,237));
+        mColors.put("Blue", Color.rgb(0, 0, 255));
+        mColors.put("Medium Blue", Color.rgb(0,0,205));
+        mColors.put("Dark Blue", Color.rgb(0, 0, 139));
+        mColors.put("Midnight Blue", Color.rgb(25,25,112));
+        mColors.put("Medium Slate Blue", Color.rgb(123,104,238));
+        mColors.put("Slate Blue", Color.rgb(106,90,205));
+        mColors.put("Dark Slate Blue", Color.rgb(72,61,139));
+        mColors.put("Indigo", Color.rgb(75, 0, 130));
+        mColors.put("Lavender", Color.rgb(230,230,250));
+        mColors.put("Dry Water Stain", Color.rgb(216,191,216));
+        mColors.put("Plum", Color.rgb(221,160,221));
+        mColors.put("Violet", Color.rgb(238,130,238));
+        mColors.put("Orchid", Color.rgb(218,112,214));
+        mColors.put("Medium Orchid", Color.rgb(186,85,211));
+        mColors.put("Medium Purple", Color.rgb(147,112,219));
+        mColors.put("Blue Violet", Color.rgb(138,43,226));
+        mColors.put("Dark Violet", Color.rgb(148,0,211));
+        mColors.put("Dark Orchid", Color.rgb(153,50,204));
+        mColors.put("Dark Magenta", Color.rgb(139,0,139));
+        mColors.put("Purple", Color.rgb(128,0,128));
+        mColors.put("Fuchsia", Color.rgb(255,0,255));
+        mColors.put("Pink", Color.rgb(255,192,203));
+        mColors.put("Light Pink", Color.rgb(255,182,193));
+        mColors.put("Hot Pink", Color.rgb(255,105,180));
+        mColors.put("Deep Pink", Color.rgb(255,20,147));
+        mColors.put("Pale Violet Red", Color.rgb(219,112,147));
+        mColors.put("Medium Violet Red", Color.rgb(199,21,133));
+        mColors.put("White", Color.rgb(255, 255, 255));
+        mColors.put("Snow", Color.rgb(255,250,250));
+        mColors.put("Honeydew", Color.rgb(240,255,240));
+        mColors.put("Mint Cream", Color.rgb(245,255,250));
+        mColors.put("Azure", Color.rgb(240,255,255));
+        mColors.put("Alice Blue", Color.rgb(240,248,255));
+        mColors.put("Ghost White", Color.rgb(248,248,255));
+        mColors.put("White Smoke", Color.rgb(245,245,245));
+        mColors.put("Seashell", Color.rgb(255,245,238));
+        mColors.put("Ivory", Color.rgb(255,255,240));
+        mColors.put("Lavender Blush", Color.rgb(255,240,245));
+        mColors.put("Misty Rose", Color.rgb(255,228,225));
+        mColors.put("Black", Color.rgb(0, 0, 0));
+        mColors.put("Silver", Color.rgb(192,192,192));
+        mColors.put("Light Gray", Color.rgb(211, 211,211));
+        mColors.put("Gray", Color.rgb(169,169,169));
+        mColors.put("Dark Gray", Color.rgb(128, 128, 128));
+        mColors.put("Dim Gray", Color.rgb(105,105,105));
+        mColors.put("Light Slate Gray", Color.rgb(119,136,153));
+        mColors.put("Slate Gray", Color.rgb(112,128,144));
+        mColors.put("Dark Slate Gray", Color.rgb(47,79,79));
+        mColors.put("Cornsilk", Color.rgb(255,248,220));
+        mColors.put("Wheat", Color.rgb(246,222,179));
+        mColors.put("Tan", Color.rgb(210,180,140));
+        mColors.put("Rosy Brown", Color.rgb(188,143,143));
+        mColors.put("Sandy Brown", Color.rgb(244,164,96));
+        mColors.put("Goldenrod", Color.rgb(218,165,32));
+        mColors.put("Light Wood", Color.rgb(205,133,63));
+        mColors.put("Orange Brown", Color.rgb(210,105,30));
+        mColors.put("Saddle Brown", Color.rgb(139,69,19));
+        mColors.put("Sienna", Color.rgb(160,82,45));
+        mColors.put("Brown", Color.rgb(165, 42, 42));
+        mColors.put("Beige", Color.rgb(245,245,220));
+    }
+
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -220,46 +349,9 @@ public class MainActivity extends AppCompatActivity {
             int r = Color.red(pixel);
             int g = Color.green(pixel);
             int b = Color.blue(pixel);
-            String colorName = "";
+            String colorName = getBestMatchingColorName(pixel);
 
-            mColors.put("Maroon", Color.rgb(128, 0, 0));
-            mColors.put("Red", Color.rgb(255, 0, 0));
-            mColors.put("Orange-Red", Color.rgb(255, 69,0));
-            mColors.put("Dark Orange", Color.rgb(255, 140, 0));
-            mColors.put("Orange", Color.rgb(255, 165, 0));
-            mColors.put("Gold", Color.rgb(255, 215, 0));
-            mColors.put("Yellow", Color.rgb(255, 255, 0));
-            mColors.put("Khaki", Color.rgb(240, 230, 140));
-            mColors.put("Tan", Color.rgb(210, 180, 140));
-            mColors.put("Lime Green", Color.rgb(0, 255, 0));
-            mColors.put("Green", Color.rgb(0, 128, 0));
-            mColors.put("Sea Green", Color.rgb(46, 139, 87));
-            mColors.put("Teal", Color.rgb(0,128,128));
-            mColors.put("Turquoise", Color.rgb(64,224,208));
-            mColors.put("Light Blue", Color.rgb(173, 216, 230));
-            mColors.put("Deep Sky Blue", Color.rgb(0, 191, 222));
-            mColors.put("Blue", Color.rgb(0, 0, 255));
-            mColors.put("Dark Blue", Color.rgb(0, 0, 139));
-            mColors.put("Indigo", Color.rgb(75, 0, 130));
-            mColors.put("Dark Magenta", Color.rgb(139, 0, 139)); // r 155 b 255
-            mColors.put("Violet", Color.rgb(148, 0, 211));
-            mColors.put("Light Pink", Color.rgb(255,182,193));
-            mColors.put("Pink", Color.rgb(255, 0, 255));
-            mColors.put("Hot Pink", Color.rgb(255,20,147));
-            mColors.put("Fuschia", Color.rgb(199,21,133));
-            mColors.put("White", Color.rgb(255, 255, 255));
-            mColors.put("Black", Color.rgb(0, 0, 0));
-            mColors.put("Silver", Color.rgb(192,192,192));
-            mColors.put("Light Gray", Color.rgb(211, 211,211));
-            mColors.put("Gray", Color.rgb(128, 128, 128));
-            mColors.put("Brown", Color.rgb(139, 69, 19));
-            mColors.put("Russet Brown", Color.rgb(165,42,42));
-            mColors.put("Light Brown", Color.rgb(210, 105,30));
-            mColors.put("Beige", Color.rgb(245,245,220));
-
-            colorName = getBestMatchingColorName(pixel);
-
-            myTextView.setBackgroundColor(Color.rgb(0, 0, 0)); // set background to black
+            myTextView.setBackgroundColor(Color.rgb(r, g, b)); // set background to black
             myTextView.setText(colorName);
 //            myTextView.setText("R(" + r + ")\n" + "G(" + g + ")\n" + "B(" + b + ")");
         }
