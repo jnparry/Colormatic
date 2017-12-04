@@ -1,8 +1,6 @@
 package com.example.jordan.colormatic;
 
 import android.Manifest;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -68,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private TextureView textureView;
     private TextView myTextView;
-    private String colorName = "";
 
     private boolean p1 = false; // preset1
     private boolean p2 = false; // preset2
@@ -98,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Bitmap bitmap;
 
-    private Map<String, Integer> mColors = new HashMap<>();
+    private Map<String, Integer> mColors = new HashMap<String, Integer>();
 
     /**
      * Creates camera object and respective variables
@@ -124,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         assert takePictureButton != null;
         assert crosshairButton != null;
 
-        createDatabaseMap();
+        createDatabseMap();
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +158,12 @@ public class MainActivity extends AppCompatActivity {
                                 p1 = false;
                                 p2 = true;
                                 p3 = false;
+//                                for (int x = 0; x <= bitmap.getWidth(); x++) {
+//                                    for (int y = 0; x <= bitmap.getHeight(); y++) {
+//                                        bitmap.setPixel(x, y, Color.rgb(255, 255, 255));
+//                                    }
+//                                }
+//                                bitmap.setPixel(bitmap.getWidth(), bitmap.getHeight(), Color.rgb(255,255,255));
                             }
                         }
                         else if (Objects.equals("Tritanomaly", menuItem.getTitle())) {
@@ -198,20 +201,14 @@ public class MainActivity extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Preset Color", colorName);
-        clipboard.setPrimaryClip(clip);
-
-        int pixel = bitmap.getPixel((bitmap.getWidth() / 2), (bitmap.getHeight() / 2));
-        int r = Color.red(pixel);
-        int g = Color.green(pixel);
-        int b = Color.blue(pixel);
-
-        String hex = String.format("#%02x%02x%02x", r, g, b);
-        Toast.makeText(MainActivity.this, "Copied hex code to clipboard: \n" + colorName + ", " + hex, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Crosshair Button Pressed", Toast.LENGTH_SHORT).show();
     }
 
-    public void createDatabaseMap() {
+    /**
+     * Create Database Map
+     * This creates a 'database' for the color names in respect to the closest RGB value
+     */
+    public void createDatabseMap() {
         mColors.put("Light Salmon", Color.rgb(255,160,122));
         mColors.put("Salmon", Color.rgb(250,128,114));
         mColors.put("Dark Salmon", Color.rgb(233,150,122));
@@ -362,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
             int r = Color.red(pixel);
             int g = Color.green(pixel);
             int b = Color.blue(pixel);
-            colorName = getBestMatchingColorName(pixel);
+            String colorName = getBestMatchingColorName(pixel);
 
             myTextView.setBackgroundColor(Color.rgb(r, g, b)); // set background to black
             myTextView.setText(colorName);
@@ -370,6 +367,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * GET BEST MATCHING COLOR NAME
+     * This gets the closest color name to the RGB that is currently in the center of the screen
+     * @param pixelColor
+     * @return
+     */
     private String getBestMatchingColorName(int pixelColor) {
         // largest difference is 255 for every colour component
         int currentDifference = 3 * 255;
@@ -586,13 +589,19 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "updatePreview error, return");
         }
         if (p1 == true) {
+//            textureView.getBitmap()
 //            captureRequestBuilder.set(CaptureRequest.CONTROL_AWB_MODE, CaptureRequest.CONTROL_AWB_MODE_OFF);
 //            captureRequestBuilder.set(CaptureRequest.COLOR_CORRECTION_MODE, CaptureRequest.COLOR_CORRECTION_MODE_TRANSFORM_MATRIX);
 //            // captureRequestBuilder.set(CaptureRequest.COLOR_CORRECTION_TRANSFORM, CaptureRequest.COLOR_CORRECTION_GAINS)
 //            colorCorrection.transform = [ 0 1 2 3 4 5 6 7 8 9]
         }
         else if (p2 == true) {
-
+            Toast.makeText(MainActivity.this, "Should be looping.", Toast.LENGTH_LONG).show();
+            for (int x = 0; x <= bitmap.getWidth(); x++) {
+                for (int y = 0; x <= bitmap.getHeight(); y++) {
+                    bitmap.setPixel(x, y, Color.rgb(255, 255, 255));
+                }
+            }
         }
         else if (p3 == true) {
 
