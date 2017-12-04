@@ -1,6 +1,8 @@
 package com.example.jordan.colormatic;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private TextureView textureView;
     private TextView myTextView;
+    private String colorName = "";
 
     private boolean p1 = false; // preset1
     private boolean p2 = false; // preset2
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Bitmap bitmap;
 
-    private Map<String, Integer> mColors = new HashMap<String, Integer>();
+    private Map<String, Integer> mColors = new HashMap<>();
 
     /**
      * Creates camera object and respective variables
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         assert takePictureButton != null;
         assert crosshairButton != null;
 
-        createDatabseMap();
+        createDatabaseMap();
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,10 +198,20 @@ public class MainActivity extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        Toast.makeText(this, "Crosshair Button Pressed", Toast.LENGTH_SHORT).show();
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Preset Color", colorName);
+        clipboard.setPrimaryClip(clip);
+
+        int pixel = bitmap.getPixel((bitmap.getWidth() / 2), (bitmap.getHeight() / 2));
+        int r = Color.red(pixel);
+        int g = Color.green(pixel);
+        int b = Color.blue(pixel);
+
+        String hex = String.format("#%02x%02x%02x", r, g, b);
+        Toast.makeText(MainActivity.this, "Copied hex code to clipboard: \n" + colorName + ", " + hex, Toast.LENGTH_SHORT).show();
     }
 
-    public void createDatabseMap() {
+    public void createDatabaseMap() {
         mColors.put("Light Salmon", Color.rgb(255,160,122));
         mColors.put("Salmon", Color.rgb(250,128,114));
         mColors.put("Dark Salmon", Color.rgb(233,150,122));
@@ -349,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
             int r = Color.red(pixel);
             int g = Color.green(pixel);
             int b = Color.blue(pixel);
-            String colorName = getBestMatchingColorName(pixel);
+            colorName = getBestMatchingColorName(pixel);
 
             myTextView.setBackgroundColor(Color.rgb(r, g, b)); // set background to black
             myTextView.setText(colorName);
