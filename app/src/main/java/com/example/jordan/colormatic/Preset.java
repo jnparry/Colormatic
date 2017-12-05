@@ -1,7 +1,5 @@
 package com.example.jordan.colormatic;
 
-import android.graphics.ColorSpace;
-
 /**
  * Created by Logan on 11/1/2017.
  */
@@ -9,24 +7,24 @@ import android.graphics.ColorSpace;
 public class Preset {
 
     // Variables
-    private String     presetName;
-    private ColorSpace colorSpace;
+    private String presetName;
+    private String hexColor;
 
-    // Methods
     //Default Constructor
     Preset(){
         presetName = "";
-        colorSpace = null;
+        hexColor   = "";
     }
 
     //Non-Default constructor
     Preset(String stringTemp){
         presetName = stringTemp;
-        colorSpace = null;
+        hexColor   = "";
     }
 
-    public void       setPresetName(String name) { presetName = name;  }
-    public void       setColor(ColorSpace color) { colorSpace = color; }
-    public String     getPresetName()            { return presetName;  }
-    public ColorSpace getColor()                 { return colorSpace;  }
+    // Methods
+    public void       setName(String name)     { presetName = name;  }
+    public void       setColor(String color)   { hexColor = color;   }
+    public String     getName()                { return presetName;  }
+    public String     getColor()               { return hexColor;    }
 }
