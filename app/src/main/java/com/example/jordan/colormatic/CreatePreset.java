@@ -36,7 +36,6 @@ public class CreatePreset extends AppCompatActivity {
     private String presetColor = "";
     private ColorPickerDialogBuilder colorPicker;
 
-
     private TextView displayText;
     private String message;
 
@@ -44,9 +43,8 @@ public class CreatePreset extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_preset);
-        //final Intent i = new Intent("com.example.jordan.colormatic");
-        final Intent mIntent = new Intent(this, MainActivity.class);
-        //final Intent i2 = new Intent("com.example.jordan.colormatic");
+
+        final Intent intent = new Intent(this, MainActivity.class);
 
         //_text = intent.getStringExtra(MainActivity.TEST_TEXT);
 
@@ -81,10 +79,11 @@ public class CreatePreset extends AppCompatActivity {
                     Toast.makeText(CreatePreset.this, "You have not named your preset", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mIntent.putExtra("savedText", presetName);
-                mIntent.putExtra("savedColor", presetColor);
-                startActivity(mIntent);
-                //savePreset();
+                Bundle extras = new Bundle();
+                extras.putString("PRESET_NAME", presetName);
+                extras.putString("COLOR", presetColor);
+                intent.putExtras(extras);
+                startActivity(intent);
             }
         });
     }
@@ -131,9 +130,11 @@ public class CreatePreset extends AppCompatActivity {
                    @Override
                    public void onColorSelected(int selectedColor) {
                        //Toast.makeText(CreatePreset.this, "onColorSelected: 0x" + Integer.toHexString(selectedColor), Toast.LENGTH_SHORT).show();
-                       //Toast.makeText(CreatePreset.this, "The color you selected: " + Integer.toHexString(selectedColor), Toast.LENGTH_SHORT).show();
 
                        presetColor = Integer.toHexString(selectedColor);
+                       presetColor = presetColor.substring(2); // takes off the "ff" from the front
+
+                       //Toast.makeText(CreatePreset.this, "The color you selected: " + presetColor, Toast.LENGTH_SHORT).show();
                    }
                })
                .setPositiveButton("Use This Color", new ColorPickerClickListener() {
