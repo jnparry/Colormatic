@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Map<String, Integer> mColors = new HashMap<>();
 
+    private String ColormaticImageFilePathDirectory = "";
 
     /**
      * Creates camera object and respective variables
@@ -110,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
      * @author ColormaticTeam
      * @param savedInstanceState
      */
-    private String ColormaticImageFilePathDirectory = "";
 
     /**
      * Creates a directory for pictures from Colormatic app to be saved to
@@ -194,8 +194,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        createDirectoryAndSaveFile();
+        String ColormaticImageFilePathDirectory = createDirectoryAndSaveFile();
 
 
         textureView = findViewById(R.id.texture);
