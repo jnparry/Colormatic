@@ -98,17 +98,18 @@ public class CreatePreset extends AppCompatActivity {
 
         String msg = "THIS ";
         String tag = "SECOND ACTIVITY";
-        Throwable tr = new Throwable();
+        //Throwable tr = new Throwable();
 
-        Log.e(tag, msg, tr);
+        //Log.e(tag, msg, tr);
 
         SharedPreferences sharedPrefs = getSharedPreferences(MainActivity.APP_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
 
-//        editor.putString(MainActivity.TEST_TEXT, _text);
+        editor.putString(MainActivity.TEST_TEXT, _text);
 //        Toast.makeText(this, "Saved Text", Toast.LENGTH_SHORT).show();
 
         presetName = presetText.getText().toString();
+        //Log.e(tag, "Preset name: "+presetName);
         editor.putString("PRESET_NAME", presetName);
         //Toast.makeText(this, "Saved preset name: " + presetName, Toast.LENGTH_SHORT).show();
 
