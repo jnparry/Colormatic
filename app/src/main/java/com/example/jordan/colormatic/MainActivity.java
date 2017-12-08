@@ -67,8 +67,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView myTextView;
 
     private String colorName = "";
-    private String newPresetName = "";
-    private String newColor = "";
+    private String preset1 = "";
+    private String preset2 = "";
+    private String preset3 = "";
+    String newPresetName = "";
+    String newColor = "";
 
     private boolean p1 = false; // preset1
     private boolean p2 = false; // preset2
@@ -128,26 +131,31 @@ public class MainActivity extends AppCompatActivity {
         textureView.buildDrawingCache(true);
 
         createDatabaseMap(); // read the colors into a map
-        addUserPreset(); // add the preset that user just created.
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(MainActivity.this, menu);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+
+                popupMenu.getMenu().add(0, 0, 4, "Settings");
+                popupMenu.getMenu().add(0, 0, 3, preset3);
+                popupMenu.getMenu().add(0, 0, 2, preset2);
+                popupMenu.getMenu().add(0, 0, 1, preset1);
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (Objects.equals("Settings", menuItem.getTitle())) {
-                            Toast.makeText(MainActivity.this, "New Activity", Toast.LENGTH_SHORT).show();
                             //startActivity(new Intent(MainActivity.this, advanceSetting.class));
                             startActivity(new Intent(MainActivity.this, CreatePreset.class)); // just a shortcut until we can have the 2nd and 3rd activity communicate
                         }
-                        else if (Objects.equals("Deuteranomaly", menuItem.getTitle())) {
-                            Toast.makeText(MainActivity.this, "Locate your visual accessibility settings", Toast.LENGTH_LONG).show();
-                            Toast.makeText(MainActivity.this, "Turn on your color adjustment for your specific colorblindness", Toast.LENGTH_LONG).show();
-                            startActivityForResult(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), 0);
+
+                        // TODO add the list of presets and display the top 3
+
+                        else if (Objects.equals(preset1, menuItem.getTitle())) {
+                            //Toast.makeText(MainActivity.this, "Locate your visual accessibility settings", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(MainActivity.this, "Turn on your color adjustment for your specific colorblindness", Toast.LENGTH_LONG).show();
+                            //startActivityForResult(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), 0);
                             if (p1) {
                                 p1 = false;
                             }
@@ -157,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                                 p3 = false;
                             }
                         }
-                        else if (Objects.equals("Protanomaly", menuItem.getTitle())) {
+                        else if (Objects.equals(preset2, menuItem.getTitle())) {
                             if (p2) {
                                 p2 = false;
                             }
@@ -167,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                                 p3 = false;
                             }
                         }
-                        else if (Objects.equals("Tritanomaly", menuItem.getTitle())) {
+                        else if (Objects.equals(preset3, menuItem.getTitle())) {
                             if (p3) {
                                 p3 = false;
                             }
@@ -194,6 +202,47 @@ public class MainActivity extends AppCompatActivity {
                 takePicture();
             }
         });
+    }
+
+    private void setLast3PresetNames() {
+        Preset temp;
+        if (presetList.size() < 3) {
+            temp = new Preset();
+            temp.setName("Deuteranomaly");
+            presetList.add(temp);
+
+            temp = new Preset();
+            temp.setName("Protanopia");
+            presetList.add(temp);
+
+            temp = new Preset();
+            temp.setName("Protanomaly");
+            presetList.add(temp);
+        }
+        addUserPreset();
+//        Preset p  = addUserPreset(); // add the preset that user just created.
+//        presetList.add(p);
+
+        Log.e(TAG, "There are "+presetList.size()+" Presets in the list");
+//        Log.e(TAG, "This is the first item in the list: "+presetList.get(0).getName());
+//        Log.e(TAG, "This is the last item in the list: "+presetList.get(presetList.size()-1).getName());
+
+        temp = presetList.get(presetList.size()-1);
+        preset1 = temp.getName();
+        //Log.e(TAG, "Preset1 == "+preset1);
+
+        temp = presetList.get(presetList.size()-2);
+        preset2 = temp.getName();
+        //Log.e(TAG, "Preset2 == "+preset2);
+
+        temp = presetList.get(presetList.size()-3);
+        preset3 = temp.getName();
+        //Log.e(TAG, "Preset3 == "+preset3);
+
+        Log.e(TAG, "List contents are: ");
+        for (int i = 0; i < presetList.size(); i++) {
+            Log.e(TAG, "         Index: "+i+" - "+presetList.get(i).getName());
+        }
     }
 
     public void crosshairButton(View view) {
@@ -230,8 +279,19 @@ public class MainActivity extends AppCompatActivity {
         Preset p = new Preset();
         p.setName(newPresetName);
         p.setColor(newColor);
+        Log.e(TAG, "Adding preset: "+p.getName()+" | "+p.getColor());
         presetList.add(p);
-        Toast.makeText(this, "Added your preset", Toast.LENGTH_SHORT).show();
+        //Log.e(TAG, "The last Preset in the list is: "+presetList.get(presetList.size()-1).getName());
+        //Toast.makeText(this, "Added your preset", Toast.LENGTH_SHORT).show();
+        extras.clear();
+
+//        Log.e(TAG, "List contents are: ");
+//        for (int i = 0; i < presetList.size(); i++) {
+//            Log.e(TAG, "         "+presetList.get(i).getName());
+//        }
+
+        // TODO actually add the Preset to the list
+        // right now, however many times you call this function, it will only add one, so there will only ever be 4 Presets in the list.
     }
 
     public void createDatabaseMap() {
@@ -424,13 +484,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return closestColorName;
-    };
+    }
 
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(@NonNull CameraDevice camera) {
             //This is called when the camera is open
             Log.e(TAG, "onOpened");
+
+            setLast3PresetNames(); // fills the list with 3 dummy presets if there aren't already 3 Presets.
+            Log.e(TAG, "called setLast3PresetNames()");
+
             cameraDevice = camera;
             createCameraPreview();
         }
