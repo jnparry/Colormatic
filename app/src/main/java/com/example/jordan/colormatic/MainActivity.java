@@ -103,16 +103,100 @@ public class MainActivity extends AppCompatActivity {
 
     private Map<String, Integer> mColors = new HashMap<>();
 
+
     /**
      * Creates camera object and respective variables
      *
      * @author ColormaticTeam
      * @param savedInstanceState
      */
+    private String ColormaticImageFilePathDirectory = "";
+
+    /**
+     * Creates a directory for pictures from Colormatic app to be saved to
+     *
+     * @return String containing the file path to be used to save the image taken by Colormatic Application
+     */
+    //private void createDirectoryAndSaveFile(Bitmap imageToSave, String fileName) {
+    private String createDirectoryAndSaveFile() {
+        File CameraDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString());
+        //File direct = new File(Environment.getExternalStorageDirectory()+ "/Colormatic");
+
+        //this is the directory name that was created depending on which if statment was used below
+        String ColormaticImageDirectoryPath = "";
+
+        /**
+         * used to Create the new directory for colormatic
+         */
+        if (CameraDirectory.exists()) {
+
+            //name of the directory to search for and make if not found
+            String colormaticFileName = "Colormatic";
+            boolean colormaticFileFound = false;
+
+            //colormaticDirectory path to make the file
+            File colormaticDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() + "/" + "Colormatic");
+
+            //Creates a list of all directories in the file.
+            File[] files = CameraDirectory.listFiles();
+
+            //checks to make sure the directory doesn't already exist. Ovoid overwriting
+            for(File fileIterator: files){
+                if( ( fileIterator.isDirectory() ) && ( fileIterator.getName() == colormaticFileName ) ){
+                    colormaticFileFound = true;
+                }
+            }
+
+            //create the Colormatic Folder if there was none found from search above.
+            if(!colormaticFileFound){
+                colormaticDirectory.mkdirs();
+            }
+            ColormaticImageDirectoryPath = colormaticDirectory.getName();
+
+        }
+        else
+        {
+            File newColormaticDirectory = new File("/sdcard/DirName/");
+
+            //double check directory really doesn't exist creates own directory
+            if(!CameraDirectory.exists())
+            {
+                newColormaticDirectory.mkdir();
+            }
+
+            ColormaticImageDirectoryPath = newColormaticDirectory.getName();
+        }
+
+        return ColormaticImageDirectoryPath;
+
+       /* File file = new File(new File("/sdcard/DirName/"), fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+    }
+
+        /**
+         * Creates camera object and respective variables
+         *
+         * @author ColormaticTeam
+         * @param savedInstanceState
+         */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createDirectoryAndSaveFile();
+
 
         textureView = findViewById(R.id.texture);
         assert textureView != null;
@@ -531,6 +615,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
     protected void takePicture() {
         if(null == cameraDevice) {
             Log.e(TAG, "cameraDevice is null");
