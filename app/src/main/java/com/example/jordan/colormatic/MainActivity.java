@@ -290,6 +290,9 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
+    /**
+     * <p>Adds the standard 3 Presets to the beginning of the list.</p>
+     */
     private void setStandardPresets() {
         Preset temp;
         temp = new Preset();
@@ -305,6 +308,14 @@ public class MainActivity extends AppCompatActivity {
         presetList.add(temp);
     }
 
+    /**
+     * <p>Loads the presets from the Gson. But first, it checks to see if there is anything in it by looking for
+     * the count variable that was stored. If there is a count varaible, then there is something there, if not,
+     * then it skips to the function call: addUserPreset().</p>
+     *
+     * <p>If there is something that can be grabbed from Shared Preferences, then it loops through and adds each
+     * Preset to the list that was destroyed when the activity was changed. </p>
+     */
     private void loadPresets() {
         Gson gson = new Gson();
         String jsonCount = mPrefs.getString("Count", "");
@@ -320,6 +331,10 @@ public class MainActivity extends AppCompatActivity {
         addUserPreset();
     }
 
+    /**
+     * <p>This functions will take the last 3 Presets in the list and then take the names and store them in global String variables.
+     * Later, the popup menu will call those global variables and display them.</p>
+     */
     private void setLast3PresetNames() {
         Preset temp;
         Log.e(TAG, "There are "+presetList.size()+" Presets in the list");
@@ -341,12 +356,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * <p>This function does 3 things. 1) It clears the list so that there is nothing in it. 2) It loads back in
+     * the 3 standard Presets. 3) it sets the last 3 presets to display on the pop-up menu.</p>
+     */
     private void resetPresets() {
         presetList.clear();
         setStandardPresets();
         setLast3PresetNames();
     }
 
+    /**
+     * <p>Creates a new Gson object to store the Preset in Shared Preferences. It loops through the list and saves
+     * each one into the prefsEditor. After it has saved each list, it keeps a count variable that keeps track of
+     * how many items are in the list. It seeemd to be easier that way instead of converting the list into a set
+     * and saving the set.</p>
+     */
     private void savePresets() {
         Gson gson = new Gson();
         int i;
@@ -381,6 +406,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "Copied hex code to clipboard: \n" + colorName + ": " + hex, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * <p>This function will take a bundle from the CreatePreset activity. After the bundle is received and not null, it creates
+     * a new Preset and sets the name and color that was grabbed from the bundle. After that, it adds it the end of the list.</p>
+     */
     public void addUserPreset() {
         // get the information from the 3rd activity, CreatePreset
         Bundle extras = getIntent().getExtras();
@@ -590,6 +619,20 @@ public class MainActivity extends AppCompatActivity {
         return closestColorName;
     }
 
+    /**
+     * <p>Returns a CameraDevice.StateCallback</p>
+     *
+     * <p>Holds "onOpened", "onDisconnected", and "onError".</p>
+     *
+     * <p>onOpened: calls loadPreset() and setLast3PresetNames(). Afterwards, it assigns the CameraDevice object
+     * parameter to the local variable and then calls createCameraPreview().</p>
+     *
+     * <p>onDisconnected: closes the CameraDevice</p>
+     *
+     * <p>onError: closes the CameraDevice and sets it to null</p>
+     *
+     * @param camera A CameraDevice, used to show the preview.
+     */
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(@NonNull CameraDevice camera) {
@@ -621,11 +664,19 @@ public class MainActivity extends AppCompatActivity {
             createCameraPreview();
         }
     };
+
+    /**
+     * <p>Creates a new thread and starts it in the background.</p>
+     */
     protected void startBackgroundThread() {
         mBackgroundThread = new HandlerThread("Camera Background");
         mBackgroundThread.start();
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
     }
+
+    /**
+     * <p>Stops the background thread, then joins it back into the main thread.</p>
+     */
     protected void stopBackgroundThread() {
         mBackgroundThread.quitSafely();
         try {
@@ -636,8 +687,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 
     protected void takePicture() {
         if(null == cameraDevice) {

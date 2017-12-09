@@ -84,12 +84,8 @@ public class CreatePreset extends AppCompatActivity {
                .setOnColorSelectedListener(new OnColorSelectedListener() {
                    @Override
                    public void onColorSelected(int selectedColor) {
-                       //Toast.makeText(CreatePreset.this, "onColorSelected: 0x" + Integer.toHexString(selectedColor), Toast.LENGTH_SHORT).show();
-
                        presetColor = Integer.toHexString(selectedColor);
                        presetColor = presetColor.substring(2); // takes off the "ff" from the front
-
-                       //Toast.makeText(CreatePreset.this, "The color you selected: " + presetColor, Toast.LENGTH_SHORT).show();
                    }
                })
                .setPositiveButton("Use This Color", new ColorPickerClickListener() {
