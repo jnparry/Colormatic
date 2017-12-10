@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         assert takePictureButton != null;
 
         presetList = new ArrayList<>();
+        setStandardPresets();
 
         mPrefs = getPreferences(MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
@@ -559,6 +560,9 @@ public class MainActivity extends AppCompatActivity {
         mColors.put("Yellow", Color.rgb(255, 255, 0));
     }
 
+    /**
+     *
+     */
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -635,8 +639,6 @@ public class MainActivity extends AppCompatActivity {
      * <p>onDisconnected: closes the CameraDevice</p>
      *
      * <p>onError: closes the CameraDevice and sets it to null</p>
-     *
-     * @param camera A CameraDevice, used to show the preview.
      */
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
@@ -693,6 +695,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * When the take picture button is pressed, this function captures what is being previewed and
+     * stores it in an ImageReader.
+     *
+     * <p>Specifically, once the ImageReader is initialized and called through an onClickListener,
+     * it renders the image through a byte array. After it is rendered by the specific dimensions,
+     * it is saved to a file location.</p>
+     */
     protected void takePicture() {
         if(null == cameraDevice) {
             Log.e(TAG, "cameraDevice is null");
@@ -781,6 +791,12 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Grabs the textureView from the XML and fills the buffer with pixels. It then asks the camera if
+     * this program can use it and then creates a capture sessions, or fills the pixels with the
+     * corrects colors to represent the outside world.
+     */
     protected void createCameraPreview() {
         try {
             SurfaceTexture texture = textureView.getSurfaceTexture();
@@ -809,6 +825,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Gets the camera and and sets the boundaries. Then it fills the boundaries with pixels. It
+     * then checks the permissions and makes sure that it has already granted the permissions.
+     */
     private void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         Log.e(TAG, "is camera open");
@@ -855,12 +876,23 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Closes the CameraDevice and sets it to null.
+     */
     private void closeCamera() {
         if (null != cameraDevice) {
             cameraDevice.close();
             cameraDevice = null;
         }
     }
+
+    /**
+     * Checks the permissions so that the device can use the camera2 API.
+     * @param requestCode A code that is received
+     * @param permissions String array
+     * @param grantResults int array with the results
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
@@ -871,6 +903,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * When the camera comes back, the backgroundThread starts and the preview starts.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -882,19 +918,15 @@ public class MainActivity extends AppCompatActivity {
             textureView.setSurfaceTextureListener(textureListener);
         }
     }
+
+    /**
+     * When the camera closes, it stops the backgroundThread and sets the CameraDevice to null.
+     */
     @Override
     protected void onPause() {
         Log.e(TAG, "onPause");
         closeCamera();
         stopBackgroundThread();
         super.onPause();
-    }
-
-    /* color editing functions */
-    // takes a bitmap object as a parameter and changes it to the specified color in the preset class, and returns the new color.
-    private Bitmap changeHue(Bitmap color) {return color;}
-
-    private void setHexColor() {
-        String hexCode = "";
     }
 }
