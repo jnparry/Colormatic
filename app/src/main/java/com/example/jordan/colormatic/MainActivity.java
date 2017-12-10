@@ -60,11 +60,14 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * Creates the camera object and respective variables. Adds the ring as the take picture button,
+ * the hamburger icon in the bottom right corner, and supplies/fills the popup menu. It also
+ * displays the crosshairs in the middle of the screen and grabs the color at wherever the use
+ * is pointing the crosshairs at. We also create the map and read in all the colors.
  *
- *
- *  @author ColormaticTeam
- *
+ * @author ColormaticTeam
  */
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private TextureView textureView;
@@ -109,13 +112,14 @@ public class MainActivity extends AppCompatActivity {
 
     private String ColormaticImageFilePathDirectory;
 
-        /**
-         * Creates camera object and respective variables
-         *
-         * @author ColormaticTeam
-         * @param savedInstanceState
-         */
-
+    /**
+     * Initializes the variables that we need, sets up the camera and TextureView, and stores
+     * all the buttons and onClickListeners. It also starts the popup menu with that variables that
+     * are programmatically changed.
+     *
+     * @param savedInstanceState A bundle that is given whenever the activity starts.
+     *                           Usually used for orientation change, but we don't use that feature.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * <p>Adds the standard 3 Presets to the beginning of the list.</p>
+     * Adds the standard 3 Presets to the beginning of the list.
      */
     private void setStandardPresets() {
         Preset temp;
@@ -309,9 +313,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * <p>Loads the presets from the Gson. But first, it checks to see if there is anything in it by looking for
-     * the count variable that was stored. If there is a count varaible, then there is something there, if not,
-     * then it skips to the function call: addUserPreset().</p>
+     * Loads the presets from the Gson. But first, it checks to see if there is anything in it by looking for
+     * the count variable that was stored. If there is a count variable, then there is something there, if not,
+     * then it skips to the function call: addUserPreset().
      *
      * <p>If there is something that can be grabbed from Shared Preferences, then it loops through and adds each
      * Preset to the list that was destroyed when the activity was changed. </p>
@@ -332,8 +336,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * <p>This functions will take the last 3 Presets in the list and then take the names and store them in global String variables.
-     * Later, the popup menu will call those global variables and display them.</p>
+     * This functions will take the last 3 Presets in the list and then take the names and store
+     * them in global String variables. Later, the popup menu will call those global variables and
+     * display them.
      */
     private void setLast3PresetNames() {
         Preset temp;
@@ -357,8 +362,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * <p>This function does 3 things. 1) It clears the list so that there is nothing in it. 2) It loads back in
-     * the 3 standard Presets. 3) it sets the last 3 presets to display on the pop-up menu.</p>
+     * This function does 3 things. 1) It clears the list so that there is nothing in it. 2) It loads back in
+     * the 3 standard Presets. 3) it sets the last 3 presets to display on the pop-up menu.
      */
     private void resetPresets() {
         presetList.clear();
@@ -367,10 +372,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * <p>Creates a new Gson object to store the Preset in Shared Preferences. It loops through the list and saves
+     * Creates a new Gson object to store the Preset in Shared Preferences. It loops through the list and saves
      * each one into the prefsEditor. After it has saved each list, it keeps a count variable that keeps track of
-     * how many items are in the list. It seeemd to be easier that way instead of converting the list into a set
-     * and saving the set.</p>
+     * how many items are in the list. It seemed to be easier that way instead of converting the list into a set
+     * and saving the set.
      */
     private void savePresets() {
         Gson gson = new Gson();
@@ -407,8 +412,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * <p>This function will take a bundle from the CreatePreset activity. After the bundle is received and not null, it creates
-     * a new Preset and sets the name and color that was grabbed from the bundle. After that, it adds it the end of the list.</p>
+     * This function will take a bundle from the CreatePreset activity. After the bundle is received and not null, it creates
+     * a new Preset and sets the name and color that was grabbed from the bundle. After that, it adds it the end of the list.
      */
     public void addUserPreset() {
         // get the information from the 3rd activity, CreatePreset
@@ -622,7 +627,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * <p>Returns a CameraDevice.StateCallback</p>
      *
-     * <p>Holds "onOpened", "onDisconnected", and "onError".</p>
+     * Holds "onOpened", "onDisconnected", and "onError".
      *
      * <p>onOpened: calls loadPreset() and setLast3PresetNames(). Afterwards, it assigns the CameraDevice object
      * parameter to the local variable and then calls createCameraPreview().</p>
@@ -666,7 +671,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     /**
-     * <p>Creates a new thread and starts it in the background.</p>
+     * Creates a new thread and starts it in the background.
      */
     protected void startBackgroundThread() {
         mBackgroundThread = new HandlerThread("Camera Background");
@@ -675,7 +680,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * <p>Stops the background thread, then joins it back into the main thread.</p>
+     * Stops the background thread, then joins it back into the main thread.
      */
     protected void stopBackgroundThread() {
         mBackgroundThread.quitSafely();
